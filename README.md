@@ -8,7 +8,7 @@ Este proyecto es una API REST desarrollada con Spring Boot, diseñada para ser l
 - **Conexión a PostgreSQL**: Configuración preparada para conectar con una base de datos PostgreSQL.
 - **Estructura de Errores**: Manejo de errores personalizado para una mejor integración y depuración.
 - **Respuestas Estandarizadas**: Formato unificado para todas las respuestas de la API, facilitando el consumo por parte del cliente.
-- **Licencia MIT**: Este proyecto está bajo la licencia MIT, permitiendo su uso amplio y modificaciones.
+- **Roles y Permisos**: Sistema de roles y permisos para controlar el acceso a los recursos de la API.
 
 
 ## Instalación
@@ -20,3 +20,9 @@ Sigue estos pasos para configurar el entorno de desarrollo:
 ```bash
 git clone https://github.com/LAAZDARK/api-rest-spring-boot.git
 cd api-rest-spring-boot 
+```
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo `LICENSE` para más detalles.
+
