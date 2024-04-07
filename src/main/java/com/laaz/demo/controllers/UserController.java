@@ -1,6 +1,7 @@
 package com.laaz.demo.controllers;
 
 import com.laaz.demo.dtos.UserDto;
+import com.laaz.demo.entities.User;
 import com.laaz.demo.services.UserService;
 import com.laaz.demo.utils.ApiResponse;
 import lombok.AllArgsConstructor;
@@ -23,8 +24,8 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse<Object> create(@RequestBody UserDto userDto) {
-        UserDto userResult = userService.create(userDto);
+    public ApiResponse<Object> create(@RequestBody User user) {
+        User userResult = userService.create(user);
         return new ApiResponse<Object>(userResult, "Success", HttpStatus.CREATED.value());
     }
 
@@ -41,13 +42,13 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ApiResponse<Object> findById(@PathVariable UUID id) {
-        Optional<UserDto> userOptional = userService.findById(id);
+        Optional<User> userOptional = userService.findById(id);
         return new ApiResponse<>(userOptional);
     }
 
     @PutMapping("/{id}")
     public ApiResponse<Object> update(@PathVariable UUID id, @RequestBody UserDto userDto) {
-        UserDto userResult = userService.update(id, userDto);
+        User userResult = userService.update(id, userDto);
         return new ApiResponse<>(userResult);
     }
 

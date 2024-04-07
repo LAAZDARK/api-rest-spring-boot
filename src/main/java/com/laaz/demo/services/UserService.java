@@ -12,11 +12,11 @@ import java.util.UUID;
 public interface UserService {
     Page<User> findAll(Pageable pageable);
 
-    Optional<UserDto> findById(UUID id);
+    Optional<User> findById(UUID id);
 
-    UserDto create(UserDto userDto);
+    User create(User user);
 
-    UserDto update(UUID id, UserDto userDto);
+    User update(UUID id, UserDto userDto);
 
     boolean deleteById(UUID id);
 

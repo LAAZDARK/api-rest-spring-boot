@@ -3,12 +3,14 @@ package com.laaz.demo.services.impl;
 import com.laaz.demo.dtos.UserDto;
 import com.laaz.demo.entities.User;
 import com.laaz.demo.exceptions.NotFoundException;
-import com.laaz.demo.mappers.UserMapper;
+import com.laaz.demo.repositories.RoleRepository;
 import com.laaz.demo.repositories.UserRepository;
 import com.laaz.demo.services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.Pageable;
@@ -21,7 +23,14 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
+    private final RoleRepository roleRepository;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Page<User> findAll(Pageable pageable) {
@@ -29,30 +38,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserDto> findById(UUID id) {
+    public Optional<User> findById(UUID id) {
         Optional<User> userOptional = userRepository.findById(id);
 
         if (userOptional.isEmpty()) {
             throw new NotFoundException("User not found", HttpStatus.NOT_FOUND.value());
         }
 
-        return Optional.of(UserMapper.mapToUserDto(userOptional.get()));
+        return Optional.of(userOptional.get());
     }
 
     @Override
-    public UserDto create(UserDto userDto) {
+    public User create(User user) {
         try {
-            User user = UserMapper.mapToUser(userDto);
-            User userResult = userRepository.save(user);
-
-            return UserMapper.mapToUserDto(userResult);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return userRepository.save(user);
         } catch (Exception e) {
             throw e;
         }
     }
 
     @Override
-    public UserDto update(UUID id, UserDto userDto) {
+    public User update(UUID id, UserDto userDto) {
         try {
             Optional <User> userOptional = userRepository.findById(id);
 
@@ -70,9 +77,7 @@ public class UserServiceImpl implements UserService {
             user.setStatus(userDto.getStatus());
             user.setUpdatedAt(new Date());
 
-            User userResult = userRepository.save(user);
-
-            return UserMapper.mapToUserDto(userResult);
+            return userRepository.save(user);
 
         } catch (Exception e) {
             throw e;

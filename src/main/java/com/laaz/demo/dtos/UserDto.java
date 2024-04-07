@@ -1,5 +1,6 @@
 package com.laaz.demo.dtos;
 
+import com.laaz.demo.entities.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class UserDto {
     private String lastName;
     private String email;
     private String password;
-    private String role;
+    private Role role;
     private String status;
     private Date createdAt;
     private Date updatedAt;
