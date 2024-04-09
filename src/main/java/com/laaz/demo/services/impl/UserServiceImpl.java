@@ -3,6 +3,7 @@ package com.laaz.demo.services.impl;
 import com.laaz.demo.dtos.UserDto;
 import com.laaz.demo.entities.User;
 import com.laaz.demo.exceptions.NotFoundException;
+import com.laaz.demo.mappers.UserMapper;
 import com.laaz.demo.repositories.RoleRepository;
 import com.laaz.demo.repositories.UserRepository;
 import com.laaz.demo.services.UserService;
@@ -49,10 +50,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(User user) {
+    public UserDto create(UserDto userDto) {
         try {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            return userRepository.save(user);
+            User user = UserMapper.toUser(userDto);
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            User userResult = userRepository.save(user);
+            return UserMapper.toUserDto(userResult);
         } catch (Exception e) {
             throw e;
         }

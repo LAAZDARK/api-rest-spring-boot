@@ -14,7 +14,7 @@ public interface UserService {
 
     Optional<User> findById(UUID id);
 
-    User create(User user);
+    UserDto create(UserDto userDto);
 
     User update(UUID id, UserDto userDto);
 

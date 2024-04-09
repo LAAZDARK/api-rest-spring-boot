@@ -2,14 +2,21 @@ package com.laaz.demo.controllers;
 
 import com.laaz.demo.entities.Error;
 import com.laaz.demo.exceptions.NotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @RestControllerAdvice
@@ -46,6 +53,24 @@ public class HandlerExceptionController {
     public ResponseEntity<Error> handleDuplicateKeyException(Exception e) {
         Error error = new Error(e.getMessage(), "Conflict Duplicated", HttpStatus.CONFLICT.value());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> notValid(MethodArgumentNotValidException ex, HttpServletRequest request) {
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getFieldErrors().forEach(err -> errors.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage()));
+        List<String> errorMessages = new ArrayList<>(errors.values());
+
+
+
+        Object response = new Object() {
+            public final String message = "Field validation error";
+            public final int status = HttpStatus.BAD_REQUEST.value();
+            public final List<String> errors = errorMessages;
+        };
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
 

@@ -4,6 +4,7 @@ import com.laaz.demo.dtos.UserDto;
 import com.laaz.demo.entities.User;
 import com.laaz.demo.services.UserService;
 import com.laaz.demo.utils.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -22,10 +23,11 @@ public class UserController {
 
     private final UserService userService;
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse<Object> create(@RequestBody User user) {
-        User userResult = userService.create(user);
+    public ApiResponse<Object> create(@Valid @RequestBody UserDto userDto) {
+        UserDto userResult = userService.create(userDto);
         return new ApiResponse<Object>(userResult, "Success", HttpStatus.CREATED.value());
     }
 
@@ -47,7 +49,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<Object> update(@PathVariable UUID id, @RequestBody UserDto userDto) {
+    public ApiResponse<Object> update(@PathVariable UUID id, @Valid @RequestBody UserDto userDto) {
         User userResult = userService.update(id, userDto);
         return new ApiResponse<>(userResult);
     }
