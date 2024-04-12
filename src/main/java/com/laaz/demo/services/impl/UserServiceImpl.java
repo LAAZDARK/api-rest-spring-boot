@@ -54,6 +54,7 @@ public class UserServiceImpl implements UserService {
         try {
             User user = UserMapper.toUser(userDto);
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            user.setStatus(User.STATUS_ACTIVE);
             User userResult = userRepository.save(user);
             return UserMapper.toUserDto(userResult);
         } catch (Exception e) {
