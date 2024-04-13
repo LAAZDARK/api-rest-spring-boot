@@ -1,7 +1,7 @@
 package com.laaz.demo.dtos;
 
 import com.laaz.demo.entities.Role;
-import com.laaz.demo.entities.User;
+import com.laaz.demo.enums.UserStatusEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class UserDto {
     @NotEmpty
     private String password;
     private Role role;
-    private String status;
+    private UserStatusEnum status;
     private Date createdAt;
     private Date updatedAt;
 

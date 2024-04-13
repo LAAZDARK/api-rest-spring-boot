@@ -1,6 +1,7 @@
 package com.laaz.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.laaz.demo.enums.UserStatusEnum;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -21,11 +22,6 @@ import java.util.UUID;
 @SQLDelete(sql = "UPDATE users SET deleted_at = NOW() WHERE id = ?")
 @SQLRestriction("deleted_at IS NULL")
 public class User {
-    public static String STATUS_ACTIVE = "ACTIVE";
-    public static String STATUS_INACTIVE = "INACTIVE";
-    public static String STATUS_SUSPENDED = "SUSPENDED";
-    public static String STATUS_PENDING = "PENDING";
-    public static String STATUS_VERIFIED = "VERIFIED";
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -52,8 +48,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "status", columnDefinition = "varchar(50) default 'PENDING'")
-    private String status;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private UserStatusEnum status;
 
     @Column(name = "created_at", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @CreationTimestamp

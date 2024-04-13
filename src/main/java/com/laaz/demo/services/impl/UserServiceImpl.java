@@ -2,6 +2,7 @@ package com.laaz.demo.services.impl;
 
 import com.laaz.demo.dtos.UserDto;
 import com.laaz.demo.entities.User;
+import com.laaz.demo.enums.UserStatusEnum;
 import com.laaz.demo.exceptions.NotFoundException;
 import com.laaz.demo.mappers.UserMapper;
 import com.laaz.demo.repositories.RoleRepository;
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
         try {
             User user = UserMapper.toUser(userDto);
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            user.setStatus(User.STATUS_ACTIVE);
+            user.setStatus(UserStatusEnum.ACTIVE);
             User userResult = userRepository.save(user);
             return UserMapper.toUserDto(userResult);
         } catch (Exception e) {
