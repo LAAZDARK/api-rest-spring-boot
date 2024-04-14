@@ -1,20 +1,18 @@
 package com.laaz.demo.entities;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "modules")
+public class Module {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -25,8 +23,4 @@ public class Role {
 
     @Column(name = "key", nullable = false, unique = true)
     private String key;
-
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-    private List<User> users;
-
 }

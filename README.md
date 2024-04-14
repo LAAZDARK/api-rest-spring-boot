@@ -22,6 +22,10 @@ git clone https://github.com/LAAZDARK/api-rest-spring-boot.git
 cd api-rest-spring-boot 
 ```
 
+## Diagrama de base de datos
+
+![Diagrama de base de datos](https://raw.githubusercontent.com/LAAZDARK/api-rest-spring-boot/6ff4de664f0eb1dd85d378f50c106b5dbfed3875/assets/role-and-permissions.png)
+
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - ver el archivo `LICENSE` para más detalles.
