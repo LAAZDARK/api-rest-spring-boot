@@ -29,4 +29,7 @@ public class Role {
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private List<User> users;
 
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+    private List<module_role> moduleRoles;
+
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -24,9 +25,11 @@ public class Permission {
     @Column(name = "key", nullable = false, unique = true)
     private String key;
 
-//    @ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY)
-//    private List<Role> roles;
-//
-//    @ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY)
-//    private List<Section> sections;
+    @OneToMany(mappedBy = "permission", fetch = FetchType.LAZY)
+    private List<module_permission_role> modulePermissionRoles;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "module_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Module module;
+
 }

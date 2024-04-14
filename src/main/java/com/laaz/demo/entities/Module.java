@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -23,4 +24,13 @@ public class Module {
 
     @Column(name = "key", nullable = false, unique = true)
     private String key;
+
+    @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
+    private List<module_role> moduleRoles;
+
+    @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
+    private List<module_permission_role> modulePermissionRoles;
+
+    @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
+    private List<Permission> permissions;
 }

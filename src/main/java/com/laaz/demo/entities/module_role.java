@@ -24,4 +24,13 @@ public class module_role {
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "module_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Module module;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Role role;
+
 }
