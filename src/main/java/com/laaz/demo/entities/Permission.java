@@ -26,7 +26,7 @@ public class Permission {
     private String key;
 
     @OneToMany(mappedBy = "permission", fetch = FetchType.LAZY)
-    private List<module_permission_role> modulePermissionRoles;
+    private List<ModulePermissionRole> modulePermissionRoles;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_id", referencedColumnName = "id", insertable = false, updatable = false)

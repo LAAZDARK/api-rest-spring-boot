@@ -92,6 +92,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteById(UUID id) {
         try {
+            Optional<User> userOptional = userRepository.findById(id);
+
+            if (userOptional.isEmpty()) {
+                throw new NotFoundException("User not found", HttpStatus.NOT_FOUND.value());
+            }
+
             userRepository.deleteById(id);
 
             return true;

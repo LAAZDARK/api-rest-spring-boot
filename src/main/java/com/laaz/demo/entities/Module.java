@@ -26,10 +26,7 @@ public class Module {
     private String key;
 
     @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
-    private List<module_role> moduleRoles;
-
-    @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
-    private List<module_permission_role> modulePermissionRoles;
+    private List<ModuleRole> moduleRoles;
 
     @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
     private List<Permission> permissions;
