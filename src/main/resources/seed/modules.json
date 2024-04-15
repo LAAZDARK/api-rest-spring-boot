@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Usuarios",
+    "key": "USERS",
+    "isActive": true
+  },
+  {
+    "name": "Productos",
+    "key": "PRODUCTS",
+    "isActive": true
+  }
+]

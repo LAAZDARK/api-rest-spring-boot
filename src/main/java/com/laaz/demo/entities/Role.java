@@ -3,6 +3,7 @@ package com.laaz.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,9 +29,11 @@ public class Role {
     private UUID id;
 
     @Column(name = "name", nullable = false)
+    @NotEmpty
     private String name;
 
     @Column(name = "key", nullable = false, unique = true)
+    @NotEmpty
     private String key;
 
     @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
