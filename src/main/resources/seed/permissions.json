@@ -1,0 +1,47 @@
+
+{
+  "USERS": [
+    {
+      "name": "Leer",
+      "key": "READ_USERS",
+      "is_active": true
+    },
+    {
+      "name": "Crear",
+      "key": "CREATE_USERS",
+      "is_active": true
+    },
+    {
+      "name": "Actualizar",
+      "key": "UPDATE_USERS",
+      "is_active": true
+    },
+    {
+      "name": "Eliminar",
+      "key": "DELETE_USERS",
+      "is_active": true
+    }
+  ],
+  "CLASSES": [
+    {
+      "name": "Leer",
+      "key": "READ_CLASSES",
+      "is_active": true
+    },
+    {
+      "name": "Crear",
+      "key": "CREATE_CLASSES",
+      "is_active": true
+    },
+    {
+      "name": "Actualizar",
+      "key": "UPDATE_CLASSES",
+      "is_active": true
+    },
+    {
+      "name": "Eliminar",
+      "key": "DELETE_CLASSES",
+      "is_active": true
+    }
+  ]
+}

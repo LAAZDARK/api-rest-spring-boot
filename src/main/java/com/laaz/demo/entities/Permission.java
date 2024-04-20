@@ -29,7 +29,7 @@ public class Permission {
     private List<ModulePermissionRole> modulePermissionRoles;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "module_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "module_id", referencedColumnName = "id")
     private Module module;
 
 }
